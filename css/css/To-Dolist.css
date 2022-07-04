@@ -1,0 +1,81 @@
+
+
+body {
+  background-color: deepskyblue;
+}
+
+.container {
+  width: 500px;
+  height: 500px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5%;
+  background-color: whitesmoke;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+section > * {
+  margin-top: 20px;
+}
+
+.tareas {
+  padding: 5px;
+  height: 25px;
+  width: 200px;
+  border-radius: 5px;
+  border: 4px solid gray;
+}
+.boton {
+  height: 40px;
+  width: 100px;
+  margin-left: 30px;
+  background-color: dodgerblue;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 1.2em;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: white;
+  cursor: pointer;
+}
+
+.tareas:focus {
+  border: 4px solid blue;
+  outline: navajowhite;
+}
+
+.lista {
+  width: 95%;
+  background-color: aquamarine;
+  height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+  border: thin solid #c4c4c4;
+}
+
+.trash {
+  background-color: blue;
+  height: 40px;
+  width: 50px;
+  border-width: 0px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: s;
+}
+
+.nuevo {
+  background-color: red;
+  height: 50px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
