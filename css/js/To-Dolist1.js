@@ -1,43 +1,76 @@
 let boton = document.getElementById('agregar');
 let texto = document.getElementById('texto');
 let lista = document.getElementById('lista');
-let tareas = document.getElementById('trash');
-let textos = document.getElementById('texto');
-let db = document.getElementById('texto').value;
+let dbs = [];
+document.addEventListener('DOMContentLoaded', () => {
+  dbs = JSON.parse(localStorage.getItem('tareas')) || [];
+  lista.innerHTML = '';
 
-function clean(params) {
-  return texto.value === '';
-}
-boton.addEventListener('click', (e) => {
-  if (texto.value === '') {
-    alert('Por favor, ingrese una tarea');
-  } else if (localStorage.getItem('dbs') === null) {
-    let dbs = [];
-    dbs.push(db);
-    localStorage.setItem('dbs', JSON.stringify(dbs));
-  } else {
-    let dbs = JSON.parse(localStorage.getItem('dbs'));
-    dbs.push(db);
-    localStorage.setItem('dbs', JSON.stringify(dbs));
-
+  dbs.forEach((elemento) => {
     lista.innerHTML += `<section class="nuevo">
-      <span id='titulo'>
-        ${texto.value}
-      </span>
-      <button class='trash' ><i class="fa-solid fa-trash-can"></i></button>
-    </section>
-    `;
-    document.getElementById('texto').value = '';
+    <span id='titulo'>
+    ${elemento}
+    </span>
+ <button class="trash"><i class="fa-solid fa-trash-can"></i></button>
+ </section>
+ `;
+  });
 
-    let actual = document.querySelectorAll('.trash');
+  let trash = document.querySelectorAll('.trash');
+  trash.forEach((elemento, i) => {
+    elemento.addEventListener('click', () => {
+      elemento.parentElement.remove();
+      console.log(i);
+      dbs.splice(i, 1);
+      let tareas = document.querySelectorAll('.nuevo');
+      console.log(dbs);
+      if (tareas.length === 0) {
+        dbs = [];
+      }
+      localStorage.setItem('tareas', JSON.stringify(dbs));
+    });
+  });
+});
 
-    for (let i = 0; i < actual.length; i++) {
-      actual[i].onclick = function () {
-        this.parentNode.remove();
-        if (dbs[i].texto === texto) {
-          dbs.splice(i, 1);
-        }
-      };
-    }
+function addTask() {
+  if (texto.value === '') {
+    alert('Ingrese una tarea, por favor');
+    return;
   }
+  let tarea = texto.value;
+  dbs.push(tarea);
+  console.log(dbs);
+
+  lista.innerHTML = '';
+  dbs.forEach((elemento) => {
+    lista.innerHTML += `<section class="nuevo">
+    <span id='titulo'>
+    ${elemento}
+    </span>
+ <button class="trash"><i class="fa-solid fa-trash-can"></i></button>
+ </section>
+ `;
+    texto.value = '';
+  });
+
+  localStorage.setItem('tareas', JSON.stringify(dbs));
+  let trash = document.querySelectorAll('.trash');
+
+  trash.forEach((elemento, i) => {
+    elemento.addEventListener('click', () => {
+      elemento.parentElement.remove();
+      console.log(i);
+      dbs.splice(i, 1);
+      let tareas = document.querySelectorAll('.nuevo');
+      console.log(dbs);
+      if (tareas.length === 0) {
+        dbs = [];
+      }
+      localStorage.setItem('tareas', JSON.stringify(dbs));
+    });
+  });
+}
+
+boton.addEventListener('click', (e) => {
+  addTask();
 });
